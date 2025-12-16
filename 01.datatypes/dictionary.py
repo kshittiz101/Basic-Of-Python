@@ -1,4 +1,11 @@
-# dictionary -collection data items which hold key-values pair ,which is mutable,order ,donot duplicate
+# Dictionary is one of the built in data types in python 
+# It store data in key-value pairs 
+# key in dict is must be immutable (like strings, numbers, and tuples)
+
+
+# creating dictionary 
+coffee_recipe = dict("types": "black", "size":"medium", "is_suger": false)
+print(f"coffee recipe : {coffee_recipe}")
 
 # a={
 #     "name":"sujan",
