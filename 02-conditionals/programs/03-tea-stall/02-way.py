@@ -1,4 +1,4 @@
-#  others ways create function and avoid in operations
+# In this approch we will create a function a reusable code, to get price according to the cup sized
 
 price_base_on_cup_sized = {
     'small': 10,
@@ -8,6 +8,9 @@ price_base_on_cup_sized = {
 
 
 def get_price(cup_size):
+    ''' 
+    this function will return cup price according to its sizes
+    '''
     return price_base_on_cup_sized.get(cup_size)
 
 
