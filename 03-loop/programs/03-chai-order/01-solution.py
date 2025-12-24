@@ -20,12 +20,12 @@ def display_chai_name(list_of_chai: Iterable[str]) -> list[str]:
     return message
 
 
-chai = ["black tea", "milk tea", "Masala Chai"]
+CHAI_LIST = ["black tea", "milk tea", "Masala Chai"]
 
 
 def main():
     """Main function to display chai orders"""
-    ready_chai_orders = display_chai_name(chai)
+    ready_chai_orders = display_chai_name(CHAI_LIST)
     for order in ready_chai_orders:
         print(order)
 

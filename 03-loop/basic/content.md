@@ -42,3 +42,20 @@ range(1, 6)     # 1, 2, 3, 4, 5
 range(0, 10, 2) # 0, 2, 4, 6, 8
 range(5, 0, -1) # 5, 4, 3, 2, 1 (countdown)
 ```
+
+
+# what is enumerate ? 
+enumerate() is a buit-in function in python that lets you loop over something and get bot index (postion) and the value at the same time. 
+
+## when to use it
+You should use enumerate() in Python whenever you need BOTH:
+- the index (position)
+- and the value (item) while looping through something.
+
+Example:
+```
+names = ["Ali", "Sara", "John"]
+
+for i, name in enumerate(names):
+    print(f"{i}: {name}")
+```
