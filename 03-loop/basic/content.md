@@ -59,3 +59,54 @@ names = ["Ali", "Sara", "John"]
 for i, name in enumerate(names):
     print(f"{i}: {name}")
 ```
+
+---
+
+# Python `zip()` Function Learning Notes
+
+## Definition
+`zip()` aggregates multiple iterables (lists, tuples, etc.) **in parallel**, returning an iterator of tuples where each tuple contains **corresponding elements** from each iterable.
+
+## Core Use Cases
+- Simultaneously iterating over **multiple sequences** (most common)
+- **Pairing** related data (e.g., names and scores)
+- Quickly **building dictionaries** (with `dict()`)
+- **Matrix transposition** (with `*` unpacking)
+
+## Basic Syntax
+```python
+zip(*iterables)  # Returns an iterator
+```
+
+## Example Code
+```python
+# 1. Basic usage: Parallel iteration over two lists
+names = ["Alice", "Bob", "Charlie"]
+scores = [85, 92, 78]
+
+for name, score in zip(names, scores):
+    print(f"{name}: {score}")
+# Output:
+# Alice: 85
+# Bob: 92
+# Charlie: 78
+
+# 2. Handling different lengths: Stops at the shortest
+list(zip([1, 2], ['a', 'b', 'c']))  # [(1, 'a'), (2, 'b')]
+
+# 3. Building a dictionary
+keys = ['name', 'age', 'city']
+values = ['Tom', 25, 'Beijing']
+person = dict(zip(keys, values))
+# {'name': 'Tom', 'age': 25, 'city': 'Beijing'}
+
+# 4. Matrix transposition
+matrix = [[1, 2, 3], [4, 5, 6]]
+transposed = list(zip(*matrix))  # [(1, 4), (2, 5), (3, 6)]
+```
+
+## Key Points
+- **Lazy evaluation**: Returns an iterator; use `list()` to view contents
+- **Length mismatch**: Automatically truncates to the **shortest** iterable (Python 3.10+ can use `itertools.zip_longest()` for padding)
+- **Empty inputs**: Result is empty if any input is empty
+- Often used with `enumerate`: `for i, (a, b) in enumerate(zip(list1, list2)):`
