@@ -110,3 +110,5 @@ transposed = list(zip(*matrix))  # [(1, 4), (2, 5), (3, 6)]
 - **Length mismatch**: Automatically truncates to the **shortest** iterable (Python 3.10+ can use `itertools.zip_longest()` for padding)
 - **Empty inputs**: Result is empty if any input is empty
 - Often used with `enumerate`: `for i, (a, b) in enumerate(zip(list1, list2)):`
+
+
