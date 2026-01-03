@@ -17,6 +17,8 @@ local_scope()
 
 # 2. Enclosing variable scope
 def outer_function():
+    # outer function scope is now enclosing scope for the
+    # inner function
     outer_var = "I am from outer function scope variable"
 
     def inner_func():

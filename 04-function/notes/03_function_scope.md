@@ -225,3 +225,4 @@ In the slow loop, Python performs a dictionary lookup for `math` and `math.sqrt`
 - **Local variables** are like grabbing an item from your pocket.
 - **Global variables** are like looking up an item in a library catalog every time you need it.
 - If you care about speed, keep your variables **Local**.
+- if you want to access inner function value from outer function. return the variable for inner function
