@@ -147,3 +147,81 @@ def outer():
 
 outer()
 ```
+
+# Is there is performace issues using Variable Randomly ?
+
+Yes, there is a distinct performance difference. Accessing variables is not "free," and Python has to do work to find them.
+
+According to the **LEGB Rule**, the further away Python has to look for a variable, the **slower** it is.
+
+Here is the performance breakdown from fastest to slowest:
+
+### 1. Local Variables (Fastest)
+
+When you access a variable inside a function, Python uses a fixed-size array for local variables. It doesn't need to look up names using dictionaries; it just grabs the value from a specific index in memory.
+
+- **Speed:** Extremely fast.
+- **Why:** Python optimizes function execution by pre-loading local variables into an array.
+
+### 2. Global Variables (Slower)
+
+Global variables are stored in a dictionary (`globals()`). Accessing a dictionary involves hashing the variable name and looking it up, which takes more CPU cycles than accessing a fixed array.
+
+- **Speed:** Noticeably slower than local (often ~30-40% slower).
+
+### 3. Built-in Variables (Slowest)
+
+If you override a built-in name (e.g., `print = 5`) and then try to access it, or if you are accessing standard built-ins, Python has to search through the built-in module (`builtins`).
+
+- **Speed:** Slowest of the standard scopes.
+
+### 4. Enclosing (Nested) Variables
+
+Accessing variables from an outer function (using closures) requires traversing scope chains using "free variables" (`deref`). This is generally slightly slower than accessing local variables but can be faster than globals depending on the implementation.
+
+---
+
+### The "Optimization Trick"
+
+If you are writing a performance-critical loop (like in data processing, game loops, or mathematical calculations), the standard Python optimization advice is:
+
+**Copy global variables into local variables before the loop.**
+
+#### Example of Performance Impact
+
+**The Slow Way (Global Access):**
+
+```python
+import math # Global module
+
+def compute_slow(items):
+    result = 0
+    for i in items:
+        # Python looks up 'math' and 'sqrt' in the GLOBAL scope EVERY iteration
+        result += math.sqrt(i)
+    return result
+```
+
+**The Fast Way (Local Access):**
+
+```python
+import math
+
+def compute_fast(items):
+    # Assign the global function to a LOCAL variable
+    local_sqrt = math.sqrt
+    result = 0
+    for i in items:
+        # Python looks up 'local_sqrt' in the LOCAL scope (Array access)
+        result += local_sqrt(i)
+    return result
+```
+
+**Why is the second way faster?**
+In the slow loop, Python performs a dictionary lookup for `math` and `math.sqrt` thousands of times. In the fast loop, Python performs one dictionary lookup at the start, and then thousands of fast array lookups inside the loop.
+
+### Summary
+
+- **Local variables** are like grabbing an item from your pocket.
+- **Global variables** are like looking up an item in a library catalog every time you need it.
+- If you care about speed, keep your variables **Local**.
